@@ -7,8 +7,8 @@ import joblib
 app = Flask(__name__)
 
 # Load the trained model and column names
-model = joblib.load("savedmodel\\crop_connect.pkl")
-X_columns = joblib.load("savedmodel\\X_columns.pkl")
+model = joblib.load("crop_connect.pkl")
+X_columns = joblib.load("X_columns.pkl")
 
 def get_climate_zone(city_or_state):
     climate_zones = {
