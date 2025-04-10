@@ -3,8 +3,13 @@ import requests
 import pandas as pd
 from datetime import datetime
 import joblib
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 # Load the trained model and column names
 model = joblib.load("crop_connect.pkl")
@@ -34,7 +39,7 @@ def convert_to_24hr(time_str):
     return datetime.strptime(time_str, "%I:%M %p").strftime("%H:%M")
 
 def get_weather_data(city, city_or_state):
-    api_key = "3943a514e48841a3880212335253003"
+    api_key = "2de141547c3c4ef3a55192620250904"
     url = f"http://api.weatherapi.com/v1/forecast.json?key={api_key}&q={city}&days=1&aqi=no&alerts=no"
     response = requests.get(url)
     data = response.json()
@@ -66,6 +71,7 @@ def prepare_farm_data(city, city_or_state, crop, growth_stage, soil_type):
         **{key: [value] for key, value in weather_data.items()}
     })
     return farm_data
+    print(farm_data)
 
 @app.route("/predict", methods=["POST"])
 def predict():

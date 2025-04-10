@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Irrigation - Moisture Prediction</title>
+    <style>
+        /* Overall body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container styling for form content */
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 350px;
+            transition: transform 0.3s;
+        }
+        
+        form:hover {
+            transform: scale(1.02);
+        }
+
+        /* Heading styling */
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Label styling */
+        label {
+            color: #555;
+            font-size: 14px;
+        }
+        
+        /* Input styling */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        /* Button styling */
+        button[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+            transform: scale(1.03);
+        }
+
+        /* Result text styling */
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Ideal Moisture Prediction</h2>
+        <form id="predictForm">
+            <label>City:</label><br>
+            <input type="text" name="city" required><br><br>
+
+            <label>State:</label><br>
+            <input type="text" name="state" required><br><br>
+
+            <label>Crop:</label><br>
+            <input type="text" name="crop" required><br><br>
+
+            <label>Growth Stage:</label><br>
+            <input type="text" name="growth_stage" required><br><br>
+
+            <label>Soil Type:</label><br>
+            <input type="text" name="soil_type" required><br><br>
+
+            <button type="submit">Predict Moisture</button>
+        </form>
+
+        <h3 id="result"></h3>
+    </div>
+    
+    <script>
+        const form = document.getElementById('predictForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('result').innerText = result["Predicted Ideal Moisture"]
+                    ? `Predicted Ideal Moisture: ${result["Predicted Ideal Moisture"]}`
+                    : `Error: ${result.error}`;
+            })
+            .catch(error => {
+                document.getElementById('result').innerText = `Error: ${error}`;
+            });
+        });
+    </script>
+</body>
+</html>
