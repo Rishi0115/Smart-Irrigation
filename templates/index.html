@@ -87,19 +87,51 @@
         <h2>Ideal Moisture Prediction</h2>
         <form id="predictForm">
             <label>City:</label><br>
-            <input type="text" name="city" required><br><br>
+            <input type="text" name="city" required
+            ><br><br>
 
-            <label>State:</label><br>
-            <input type="text" name="state" required><br><br>
+            <label for="State">State:</label>
+            <select name="State" id="State">
+            <option value="Jammu & Kashmir">Jammu & Kashmir</option>
+          <option value="Ladakh">Ladakh</option>
+          <option value="Himachal Pradesh">Himachal Pradesh</option>
+          <option value="Uttarakhand">Uttarakhand</option>
+          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+          <option value="Sikkim">Sikkim</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Haryana">Haryana</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Bihar">Bihar</option>
+          <option value="West Bengal">West Bengal</option>
+          <option value="Jharkhand">Jharkhand</option>
+          </select><br><br>
 
-            <label>Crop:</label><br>
-            <input type="text" name="crop" required><br><br>
+            <label for="crop">Select Crop:</label>
+    <select name="Crop" id="crop">
+      <option value="Wheat">Wheat</option>
+      <option value="Rice">Rice</option>
+      <option value="Maize">Maize</option>
+      <option value="Sugarcane">Sugarcane</option>
+    </select> <br><br>
+            
+    <label for="Growth Stage">Growth Stage:</label>
+    <select name="Growth Stage" id="Growth Stage">
+      <option value="Vegetative">Vegetative</option>
+      <option value="Flowering">Flowering</option>
+      <option value="Seeding">Seeding</option>
+      <option value="Maturity">Maturity</option>
+    </select><br><br>
 
-            <label>Growth Stage:</label><br>
-            <input type="text" name="growth_stage" required><br><br>
-
-            <label>Soil Type:</label><br>
-            <input type="text" name="soil_type" required><br><br>
+            <label for="Soil">Soil Type:</label>
+    <select name="Soil" id="Soil">
+      <option value="Desert">Desert</option>
+      <option value="Alluvial">Alluvial</option>
+      <option value="Black">Black</option>
+      <option value="Red">Red</option>
+      <option value="Laterite">Laterite</option>
+      <option value="Himalayan">Himalayan</option>
+    </select><br><br>
 
             <button type="submit">Predict Moisture</button>
         </form>
