@@ -9,4 +9,3 @@ Automated irrigation control
 Soil moisture monitoring
 Real-time sensor data
 Water usage optimization
-User-friendly dashboard
